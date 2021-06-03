@@ -12,6 +12,7 @@ function createPuzzle() {
   for(let i=0; i<25; i++) {
     square = document.createElement('div');
     square.classList.add("box"+i);
+    square.classList.add("square");
     puzzle.appendChild(square);
     squares.push(square);
   }
@@ -69,6 +70,17 @@ function checkFinish() {
   }
   console.log(response);
 }
+
+
+function insertBlackbox() {
+  blackbox = document.createElement('div');
+  blackbox.classList.add('black-box');
+  puzzle.appendChild(blackbox);
+}
+insertBlackbox();
+
+
+
 
 function MoveUp() {
   if (emptyIndex>=5) {
