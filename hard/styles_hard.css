@@ -1,0 +1,102 @@
+body {
+  background-color: black;
+  color: white;
+}
+.puzzle {
+  display: flex;
+  flex-wrap: wrap;
+  width: 370px;
+  height: 370px;
+  background-color: grey;
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
+  margin: 40px auto 0 auto;
+}
+.square {
+  width: 50px;
+  height: 50px;
+  border-radius: 5px;
+  background-color: #74766b;
+  margin: 5px;
+  z-index: 2;
+}
+.solution {
+  display: flex;
+  flex-wrap: wrap;
+  width: 160px;
+  height: 160px;
+  background-color: black;
+  border-radius: 5px;
+  justify-content: center;
+  align-items: center;
+  margin: 20px auto 0 auto;
+}
+.solution div {
+  width: 30px;
+  height: 30px;
+  border-radius: 3px;
+  background-color: #EEE4DA;
+  margin: 5px;
+}
+.message {
+  color: black;
+  margin-top: -460px;
+  z-index: 4;
+}
+.black-box {
+  width: 245px;
+  height: 245px;
+  background-color: black;
+  margin-top: -365px;
+  border-radius: 10px;
+  z-index: 1;
+}
+.score h1 {
+  color: white;
+}
+.endScreen {
+  background-color: yellow;
+  width: 370px;
+  height: 370px;
+  z-index: 4;
+  margin-top: -360px;
+  opacity: 0.5;
+  border-radius: 10px;
+}
+.endBlackbox {
+  margin-top: -360px;
+}
+.choicebox {
+  display: flex;
+  flex-wrap: wrap;
+  width: 260px;
+  z-index: 4;
+  justify-content: space-between;
+  margin-top: -310px;
+}
+.home {
+  height: 40px;
+  width: 120px;
+  background-color: #445446;
+  border-radius: 3px;
+  color: white;
+  font-size: 20px;
+  text-align: center;
+  line-height: 40px;
+  cursor: pointer;
+}
+.tryAgain {
+  height: 40px;
+  width: 120px;
+  background-color: #445446;
+  border-radius: 3px;
+  color: white;
+  font-size: 20px;
+  text-align: center;
+  line-height: 40px;
+  cursor: pointer;
+}
+.instruction {
+  color: white;
+}
