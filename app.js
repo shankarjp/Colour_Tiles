@@ -9,6 +9,16 @@ var response = [];
 var emptyIndex = Math.floor(Math.random() * 25);
 var moves = 0;
 
+const bgm = document.querySelector(".bgm");
+function playbgm(){
+  bgm.loop = true;
+  bgm.play();
+}
+function stopbgm(){
+  bgm.pause();
+}
+window.addEventListener("load", playbgm);
+
 function createPuzzle() {
   for(let i=0; i<25; i++) {
     square = document.createElement('div');
@@ -105,6 +115,7 @@ function insertBlackbox() {
 insertBlackbox();
 
 function increaseMoves() {
+  slideplay();
   moves += 1;
   document.querySelector('.score').firstElementChild.innerHTML = "Moves : "+ moves;
 }
@@ -117,6 +128,7 @@ function MoveDown() {
     current.style.backgroundColor = target.style.backgroundColor;
     target.style.backgroundColor = temp;
     emptyIndex -= 5;
+    increaseMoves();
   }
 }
 
@@ -128,6 +140,7 @@ function MoveUp() {
     current.style.backgroundColor = target.style.backgroundColor;
     target.style.backgroundColor = temp;
     emptyIndex += 5;
+    increaseMoves();
   }
 }
 
@@ -139,6 +152,7 @@ function MoveRight() {
     current.style.backgroundColor = target.style.backgroundColor;
     target.style.backgroundColor = temp;
     emptyIndex -= 1;
+    increaseMoves();
   }
 }
 
@@ -150,6 +164,7 @@ function MoveLeft() {
     current.style.backgroundColor = target.style.backgroundColor;
     target.style.backgroundColor = temp;
     emptyIndex += 1;
+    increaseMoves();
   }
 }
 
@@ -162,7 +177,6 @@ function youWin() {
   message.classList.add('message');
   puzzle.appendChild(message);
   document.querySelector('.black-box').classList.add('endBlackbox');
-
   home = document.createElement('h1');
   home.classList.add('home');
   home.innerHTML = "Home";
@@ -178,33 +192,46 @@ function youWin() {
   document.querySelector('.tryAgain').addEventListener("click", function() {
     window.location.reload(false);
   })
-
   document.querySelector('.home').addEventListener("click", function() {
     window.location.replace("#");
   })
 }
 
+function slideplay(){
+  var slide = new Audio("resources/slide.mp3");
+  if(slide.paused) {
+    slide.play();
+  } else {
+    slide.currentTime = 0
+  }
+}
+
+
 document.addEventListener('keyup', function(event) {
   switch (event.keyCode) {
     case 38:
       MoveUp();
-      increaseMoves();
       checkFinish();
       break;
     case 40:
       MoveDown();
-      increaseMoves();
       checkFinish();
       break;
     case 39:
       MoveRight();
-      increaseMoves();
       checkFinish();
       break;
     case 37:
       MoveLeft();
-      increaseMoves();
       checkFinish();
+      break;
+    case 66:
+      playbgm();
+      document.querySelector(".instruction").innerHTML = "Press S to stop background music 🔇";
+      break;
+    case 83:
+      stopbgm();
+      document.querySelector(".instruction").innerHTML = "Press B for better experience 🎧";
       break;
   }
 })

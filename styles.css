@@ -96,3 +96,6 @@ body {
   line-height: 40px;
   cursor: pointer;
 }
+.instruction {
+  color: white;
+}
