@@ -109,10 +109,6 @@ function increaseMoves() {
   document.querySelector('.score').firstElementChild.innerHTML = "Moves : "+ moves;
 }
 
-var reset = document.querySelector('.reset').addEventListener("click", function() {
-  window.location.reload(false);
-})
-
 function MoveDown() {
   if (emptyIndex>=5) {
     current = document.querySelector(".box"+emptyIndex);
@@ -158,10 +154,33 @@ function MoveLeft() {
 }
 
 function youWin() {
+  endScreen = document.createElement('div');
+  endScreen.classList.add('endScreen');
+  puzzle.appendChild(endScreen)
   message = document.createElement('h1');
   message.innerHTML = "You Win!";
   message.classList.add('message');
-  document.querySelector('.response').appendChild(message);
+  puzzle.appendChild(message);
+  document.querySelector('.black-box').classList.add('endBlackbox');
+
+  home = document.createElement('h1');
+  home.classList.add('home');
+  home.innerHTML = "Home";
+  tryAgain = document.createElement('h1');
+  tryAgain.classList.add('tryAgain');
+  tryAgain.innerHTML = "Try Again";
+  choicebox = document.createElement('div');
+  choicebox.classList.add('choicebox');
+  choicebox.appendChild(home);
+  choicebox.appendChild(tryAgain);
+  puzzle.appendChild(choicebox);
+  document.querySelector('.tryAgain').addEventListener("click", function() {
+    window.location.reload(false);
+  })
+
+  document.querySelector('.home').addEventListener("click", function() {
+    window.location.replace("https://www.google.com/");
+  })
 }
 
 document.addEventListener('keyup', function(event) {

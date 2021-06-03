@@ -39,7 +39,9 @@ body {
   margin: 5px;
 }
 .message {
-  color: white;
+  color: black;
+  margin-top: -400px;
+  z-index: 4;
 }
 .black-box {
   width: 185px;
@@ -52,6 +54,45 @@ body {
 .score h1 {
   color: white;
 }
-.reset {
+.endScreen {
+  background-color: yellow;
+  width: 310px;
+  height: 310px;
+  z-index: 4;
+  margin-top: -300px;
+  opacity: 0.5;
+  border-radius: 10px;
+}
+.endBlackbox {
+  margin-top: -300px;
+}
+.choicebox {
+  display: flex;
+  flex-wrap: wrap;
+  width: 260px;
+  z-index: 4;
+  justify-content: space-between;
+  margin-top: -250px;
+}
+.home {
+  height: 40px;
+  width: 120px;
+  background-color: #445446;
+  border-radius: 3px;
   color: white;
+  font-size: 20px;
+  text-align: center;
+  line-height: 40px;
+  cursor: pointer;
+}
+.tryAgain {
+  height: 40px;
+  width: 120px;
+  background-color: #445446;
+  border-radius: 3px;
+  color: white;
+  font-size: 20px;
+  text-align: center;
+  line-height: 40px;
+  cursor: pointer;
 }
