@@ -95,7 +95,7 @@ function timeStart() {
   }
   document.querySelector('.score').lastElementChild.innerHTML = "Time : " + displayMinutes+":"+displaySeconds;
 }
-window.setInterval(timeStart, 1000);
+var timer = setInterval(timeStart, 1000);
 
 function insertBlackbox() {
   blackbox = document.createElement('div');
@@ -174,12 +174,13 @@ function youWin() {
   choicebox.appendChild(home);
   choicebox.appendChild(tryAgain);
   puzzle.appendChild(choicebox);
+  clearInterval(timer);
   document.querySelector('.tryAgain').addEventListener("click", function() {
     window.location.reload(false);
   })
 
   document.querySelector('.home').addEventListener("click", function() {
-    window.location.replace("https://www.google.com/");
+    window.location.replace("#");
   })
 }
 
