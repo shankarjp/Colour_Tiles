@@ -7,6 +7,7 @@ var puzzleColors = [];
 var solutionColors = [];
 var response = [];
 var emptyIndex = Math.floor(Math.random() * 25);
+var moves = 0;
 
 function createPuzzle() {
   for(let i=0; i<25; i++) {
@@ -71,6 +72,30 @@ function checkFinish() {
   console.log(response);
 }
 
+var seconds = 0;
+var minutes = 0;
+var displaySeconds = 0;
+var displayMinutes = 0;
+
+function timeStart() {
+  seconds += 1;
+  if(seconds/60 === 1) {
+    seconds = 0;
+    minutes += 1;
+  }
+  if(seconds<10) {
+    displaySeconds = "0" + seconds;
+  } else {
+    displaySeconds = seconds;
+  }
+  if(minutes<10) {
+    displayMinutes = "0" + minutes;
+  } else {
+    displayMinutes = minutes;
+  }
+  document.querySelector('.score').lastElementChild.innerHTML = "Time : " + displayMinutes+":"+displaySeconds;
+}
+window.setInterval(timeStart, 1000);
 
 function insertBlackbox() {
   blackbox = document.createElement('div');
@@ -79,10 +104,16 @@ function insertBlackbox() {
 }
 insertBlackbox();
 
+function increaseMoves() {
+  moves += 1;
+  document.querySelector('.score').firstElementChild.innerHTML = "Moves : "+ moves;
+}
 
+var reset = document.querySelector('.reset').addEventListener("click", function() {
+  window.location.reload(false);
+})
 
-
-function MoveUp() {
+function MoveDown() {
   if (emptyIndex>=5) {
     current = document.querySelector(".box"+emptyIndex);
     target = document.querySelector(".box"+(emptyIndex-5));
@@ -93,7 +124,7 @@ function MoveUp() {
   }
 }
 
-function MoveDown() {
+function MoveUp() {
   if (emptyIndex<=20) {
     current = document.querySelector(".box"+emptyIndex);
     target = document.querySelector(".box"+(emptyIndex+5));
@@ -104,7 +135,7 @@ function MoveDown() {
   }
 }
 
-function MoveLeft() {
+function MoveRight() {
   if (emptyIndex%5 !== 0) {
     current = document.querySelector(".box"+emptyIndex);
     target = document.querySelector(".box"+(emptyIndex-1));
@@ -115,7 +146,7 @@ function MoveLeft() {
   }
 }
 
-function MoveRight() {
+function MoveLeft() {
   if (emptyIndex%5 !== 4) {
     current = document.querySelector(".box"+emptyIndex);
     target = document.querySelector(".box"+(emptyIndex+1));
@@ -137,18 +168,22 @@ document.addEventListener('keyup', function(event) {
   switch (event.keyCode) {
     case 38:
       MoveUp();
+      increaseMoves();
       checkFinish();
       break;
     case 40:
       MoveDown();
+      increaseMoves();
       checkFinish();
       break;
     case 39:
       MoveRight();
+      increaseMoves();
       checkFinish();
       break;
     case 37:
       MoveLeft();
+      increaseMoves();
       checkFinish();
       break;
   }
