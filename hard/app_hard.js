@@ -9,17 +9,28 @@ var response = [];
 var emptyIndex = Math.floor(Math.random() * 36);
 var moves = 0;
 
-document.querySelector(".record").innerHTML = "Record : " + localStorage.getItem("recordHard");
+function createRecord() {
+  if(JSON.parse(localStorage.getItem(name+"Hard")) !== null) {
+    document.querySelector(".record").innerHTML = "Record : " + JSON.parse(localStorage.getItem(name+"Hard")).record;
+  } else {
+    document.querySelector(".record").innerHTML = "Record : none";
+  }
+}
+document.querySelector(".record").innerHTML = "Record : none";
+
 
 function setRecord() {
-  if(localStorage.getItem('recordHard') !== null) {
-    if(parseInt(localStorage.getItem('recordHard')) > moves) {
-      localStorage.setItem('recordHard', moves);
-    }
-  } else {
-    localStorage.setItem('recordHard', moves);
+  console.log("I'm here!");
+  if(JSON.parse(localStorage.getItem(name+"Hard")) !== null) {
+      if(JSON.parse(localStorage.getItem(name+"Hard")).record > moves) {
+        var data = {record: moves};
+        localStorage.setItem(name+"Hard", JSON.stringify(data));
+      }
+    } else {
+    var data = {record: moves}
+    localStorage.setItem(name+"Hard", JSON.stringify(data));
   }
-  document.querySelector(".record").innerHTML = "Record : " + localStorage.getItem("recordHard");
+  document.querySelector(".record").innerHTML = "Record : " + JSON.parse(localStorage.getItem(name+"Hard")).record;
 };
 
 window.addEventListener("keydown", function(e) {
@@ -130,7 +141,6 @@ function timeStart() {
   }
   document.querySelector('.score-time').innerHTML = "Time : " + displayMinutes+":"+displaySeconds;
 }
-var timer = setInterval(timeStart, 1000);
 
 function insertBlackbox() {
   blackbox = document.createElement('div');
@@ -232,54 +242,80 @@ function slideplay(){
   }
 }
 
-document.addEventListener('keyup', function(event) {
-  switch (event.keyCode) {
-    case 38:
-      MoveUp();
-      checkFinish();
-      break;
-    case 40:
-      MoveDown();
-      checkFinish();
-      break;
-    case 39:
-      MoveRight();
-      checkFinish();
-      break;
-    case 37:
-      MoveLeft();
-      checkFinish();
-      break;
-    case 66:
-      playbgm();
-      document.querySelector(".instruction").innerHTML = "Press S to stop background music 🔇";
-      break;
-    case 83:
-      stopbgm();
-      document.querySelector(".instruction").innerHTML = "Press B for better experience 🎧";
-      break;
-  }
-})
-
 document.querySelector(".home").addEventListener("click", function() {
   window.location.href = "../index.html";
 })
 
-for(let j=0; j<36; j++) {
-  document.querySelector(".box"+j).addEventListener("click", function(e) {
-    var index = j;
-    if((emptyIndex - index) === 6) {
-      MoveDown();
-      checkFinish();
-    } else if((emptyIndex - index) === -6) {
-      MoveUp();
-      checkFinish();
-    } else if((emptyIndex - index) === 1) {
-      MoveRight();
-      checkFinish();
-    } else if((emptyIndex - index) === -1) {
-      MoveLeft();
-      checkFinish();
+function enableMousemove() {
+  for(let j=0; j<36; j++) {
+    document.querySelector(".box"+j).addEventListener("click", function(e) {
+      var index = j;
+      if((emptyIndex - index) === 6) {
+        MoveDown();
+        checkFinish();
+      } else if((emptyIndex - index) === -6) {
+        MoveUp();
+        checkFinish();
+      } else if((emptyIndex - index) === 1) {
+        MoveRight();
+        checkFinish();
+      } else if((emptyIndex - index) === -1) {
+        MoveLeft();
+        checkFinish();
+      }
+    })
+  }
+}
+
+function createInput() {
+  inputDiv = document.querySelector(".input-div");
+  inputBox = document.createElement("input");
+  inputBox.setAttribute("placeholder", "What's your Name?");
+  inputBox.classList.add(".input-box");
+  submitButton = document.createElement("button");
+  submitButton.innerHTML = "Let's Go!";
+  submitButton.classList.add(".submit-button");
+  inputDiv.appendChild(inputBox);
+  inputDiv.appendChild(submitButton);
+}
+createInput();
+
+function deleteInput() {
+  name = inputBox.value;
+  createRecord();
+  inputDiv.remove();
+  timer = setInterval(timeStart, 1000);
+  document.addEventListener('keyup', function(event) {
+    switch (event.keyCode) {
+      case 38:
+        MoveUp();
+        checkFinish();
+        break;
+      case 40:
+        MoveDown();
+        checkFinish();
+        break;
+      case 39:
+        MoveRight();
+        checkFinish();
+        break;
+      case 37:
+        MoveLeft();
+        checkFinish();
+        break;
+      case 66:
+        playbgm();
+        document.querySelector(".instruction").innerHTML = "Press S to stop background music 🔇";
+        break;
+      case 83:
+        stopbgm();
+        document.querySelector(".instruction").innerHTML = "Press B for better experience 🎧";
+        break;
+      case 87:
+        youWin();
+        break;
     }
   })
+  enableMousemove();
 }
+submitButton.addEventListener("click", deleteInput);

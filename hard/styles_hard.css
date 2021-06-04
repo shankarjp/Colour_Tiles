@@ -109,3 +109,19 @@ body {
 .instruction {
   text-align: center;
 }
+.input-div {
+  text-align: center;
+  margin-top: 70px;
+  margin-bottom: 50px;
+}
+.input-div input {
+  background-color: black;
+  color: white;
+  width: 300px;
+  height: 30px;
+}
+.input-div button {
+  height: 35px;
+  width: 70px;
+  cursor: pointer;
+}
