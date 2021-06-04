@@ -125,3 +125,7 @@ body {
   width: 70px;
   cursor: pointer;
 }
+.player {
+  margin-bottom: 50px;
+  text-align: center;
+}

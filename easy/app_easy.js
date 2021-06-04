@@ -305,11 +305,11 @@ function deleteInput() {
         stopbgm();
         document.querySelector(".instruction").innerHTML = "Press B for better experience 🎧";
         break;
-      case 87:
-        youWin();
-        break;
     }
   });
   enableMousemove();
+  var player = document.createElement("h1");
+  player.innerHTML = "Player : " + name;
+  document.querySelector(".player").appendChild(player);
 }
 submitButton.addEventListener("click", deleteInput);

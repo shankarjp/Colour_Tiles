@@ -128,3 +128,6 @@ h1, h2 {
   width: 70px;
   cursor: pointer;
 }
+.player {
+  margin-bottom: 50px;
+}
