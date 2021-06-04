@@ -9,7 +9,7 @@ var response = [];
 var emptyIndex = Math.floor(Math.random() * 25);
 var moves = 0;
 
-document.querySelector(".recordEasy").innerHTML = "Record : " + localStorage.getItem("record");
+document.querySelector(".record").innerHTML = "Record : " + localStorage.getItem("recordEasy");
 
 function setRecord() {
   if(localStorage.getItem('recordEasy') !== null) {
@@ -121,7 +121,7 @@ function timeStart() {
   } else {
     displayMinutes = minutes;
   }
-  document.querySelector('.score').lastElementChild.innerHTML = "Time : " + displayMinutes+":"+displaySeconds;
+  document.querySelector('.score-time').innerHTML = "Time : " + displayMinutes+":"+displaySeconds;
 }
 var timer = setInterval(timeStart, 1000);
 
@@ -135,7 +135,7 @@ insertBlackbox();
 function increaseMoves() {
   slideplay();
   moves += 1;
-  document.querySelector('.score').firstElementChild.innerHTML = "Moves : "+ moves;
+  document.querySelector('.score-moves').innerHTML = "Moves : "+ moves;
 }
 
 function MoveDown() {

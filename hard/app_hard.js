@@ -128,7 +128,7 @@ function timeStart() {
   } else {
     displayMinutes = minutes;
   }
-  document.querySelector('.score').lastElementChild.innerHTML = "Time : " + displayMinutes+":"+displaySeconds;
+  document.querySelector('.score-time').innerHTML = "Time : " + displayMinutes+":"+displaySeconds;
 }
 var timer = setInterval(timeStart, 1000);
 
@@ -142,7 +142,7 @@ insertBlackbox();
 function increaseMoves() {
   slideplay();
   moves += 1;
-  document.querySelector('.score').firstElementChild.innerHTML = "Moves : "+ moves;
+  document.querySelector('.score-moves').innerHTML = "Moves : "+ moves;
 }
 
 function MoveDown() {

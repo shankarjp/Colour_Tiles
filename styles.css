@@ -1,6 +1,7 @@
 body {
   background-color: black;
   color: white;
+  font-family: 'Open Sans', sans-serif;
 }
 .easy {
   color: green;
@@ -9,4 +10,16 @@ body {
 .hard {
   color: red;
   cursor: pointer;
+}
+.multiplayer {
+  color: yellow;
+  cursor: pointer;
+}
+h1 {
+  text-align: center;
+  font-size: 60px;
+}
+h2 {
+  text-align: center;
+  font-size: 30px;
 }
