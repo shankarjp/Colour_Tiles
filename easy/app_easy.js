@@ -257,3 +257,22 @@ document.addEventListener('keyup', function(event) {
 document.querySelector(".home").addEventListener("click", function() {
   window.location.href = "../index.html";
 })
+
+for(let j=0; j<25; j++) {
+  document.querySelector(".box"+j).addEventListener("click", function(e) {
+    var index = j;
+    if((emptyIndex - index) === 5) {
+      MoveDown();
+      checkFinish();
+    } else if((emptyIndex - index) === -5) {
+      MoveUp();
+      checkFinish();
+    } else if((emptyIndex - index) === 1) {
+      MoveRight();
+      checkFinish();
+    } else if((emptyIndex - index) === -1) {
+      MoveLeft();
+      checkFinish();
+    }
+  })
+}
