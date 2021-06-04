@@ -9,6 +9,19 @@ var response = [];
 var emptyIndex = Math.floor(Math.random() * 25);
 var moves = 0;
 
+document.querySelector(".recordEasy").innerHTML = "Record : " + localStorage.getItem("record");
+
+function setRecord() {
+  if(localStorage.getItem('recordEasy') !== null) {
+    if(parseInt(localStorage.getItem('recordEasy')) > moves) {
+      localStorage.setItem('recordEasy', moves);
+    }
+  } else {
+    localStorage.setItem('recordEasy', moves);
+  }
+  document.querySelector(".record").innerHTML = "Record : " + localStorage.getItem("recordEasy");
+};
+
 window.addEventListener("keydown", function(e) {
     if(["Space","ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].indexOf(e.code) > -1) {
         e.preventDefault();
@@ -194,11 +207,12 @@ function youWin() {
   choicebox.appendChild(tryAgain);
   puzzle.appendChild(choicebox);
   clearInterval(timer);
+  setRecord();
   document.querySelector('.tryAgain').addEventListener("click", function() {
     window.location.reload(false);
   })
   document.querySelector('.home').addEventListener("click", function() {
-    window.location.replace("#");
+    window.location.replace("../index.html");
   })
 }
 

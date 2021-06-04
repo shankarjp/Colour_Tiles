@@ -9,6 +9,19 @@ var response = [];
 var emptyIndex = Math.floor(Math.random() * 36);
 var moves = 0;
 
+document.querySelector(".record").innerHTML = "Record : " + localStorage.getItem("recordHard");
+
+function setRecord() {
+  if(localStorage.getItem('recordHard') !== null) {
+    if(parseInt(localStorage.getItem('recordHard')) > moves) {
+      localStorage.setItem('recordHard', moves);
+    }
+  } else {
+    localStorage.setItem('recordHard', moves);
+  }
+  document.querySelector(".record").innerHTML = "Record : " + localStorage.getItem("recordHard");
+};
+
 window.addEventListener("keydown", function(e) {
     if(["Space","ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].indexOf(e.code) > -1) {
         e.preventDefault();
@@ -201,11 +214,12 @@ function youWin() {
   choicebox.appendChild(tryAgain);
   puzzle.appendChild(choicebox);
   clearInterval(timer);
+  setRecord();
   document.querySelector('.tryAgain').addEventListener("click", function() {
     window.location.reload(false);
   })
   document.querySelector('.home').addEventListener("click", function() {
-    window.location.replace("#");
+    window.location.replace("../index.html");
   })
 }
 
