@@ -32,3 +32,6 @@ h2 {
 .delta {
   color: green;
 }
+.heart {
+  text-decoration: none;
+}
