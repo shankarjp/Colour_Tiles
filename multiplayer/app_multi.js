@@ -109,7 +109,7 @@ function enableFunction() {
   if(inputCount === 2) {
     console.log("I am here!");
     timer = setInterval(timeStart, 1000);
-    document.addEventListener('keyup', function enableKeys(event) {
+    keyFunction = function(event) {
       switch (event.keyCode) {
         case 38:
           MoveUp2();
@@ -158,7 +158,8 @@ function enableFunction() {
           youWin(2);
           break;
       }
-    });
+    };
+    document.addEventListener('keyup', keyFunction);
     enableMousemove();
   }
 }
@@ -408,6 +409,7 @@ function youWin(winnum) {
     clearInterval(timer);
     console.log("Checkpoint5");
   }
+  disableMove();
   document.querySelectorAll('.tryAgain')[0].addEventListener("click", function() {
     window.location.reload(false);
   })
@@ -420,6 +422,11 @@ function youWin(winnum) {
   document.querySelectorAll('.home')[1].addEventListener("click", function() {
     window.location.replace("../index.html");
   })
+}
+
+/*Disable moves after victory*/
+function disableMove() {
+  document.removeEventListener('keyup',  keyFunction);
 }
 
 /*Timer*/
