@@ -469,10 +469,10 @@ function youWin() {
     window.location.reload(false);
   })
   document.querySelectorAll('.home')[0].addEventListener("click", function() {
-    window.location.replace("../index.html");
+    window.location.replace("../../index.html");
   })
   document.querySelectorAll('.home')[1].addEventListener("click", function() {
-    window.location.replace("../index.html");
+    window.location.replace("../../index.html");
   })
 }
 
@@ -522,7 +522,7 @@ function slideplay(){
 
 /*Home button*/
 document.querySelector(".home").addEventListener("click", function() {
-  window.location.href = "../index.html";
+  window.location.href = "../../index.html";
 })
 
 /*Avoid arrows to scroll the page*/

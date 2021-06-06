@@ -1,0 +1,23 @@
+body {
+  background-color: black;
+  color: white;
+  font-family: 'Open Sans', sans-serif;
+}
+.easyMode {
+  color: green;
+}
+.given, .goal, .arrow, .note {
+  color: grey;
+}
+.continue {
+  height: 40px;
+  width: 120px;
+  background-color: #445446;
+  border-radius: 3px;
+  color: white;
+  font-size: 20px;
+  text-align: center;
+  line-height: 40px;
+  cursor: pointer;
+  margin-top: 40px;
+}

@@ -1,0 +1,43 @@
+body {
+  background-color: black;
+  color: white;
+  font-family: 'Open Sans', sans-serif;
+}
+.multiplayer {
+  color: yellow;
+}
+.given, .goal, .arrow, .note {
+  color: grey;
+}
+.easy {
+  display: inline-block;
+  height: 40px;
+  width: 120px;
+  background-color: green;
+  border-radius: 3px;
+  color: white;
+  font-size: 20px;
+  text-align: center;
+  line-height: 40px;
+  cursor: pointer;
+  margin-top: 10px;
+  margin-right: 50px;
+}
+
+.hard {
+  display: inline-block;
+  height: 40px;
+  width: 120px;
+  background-color: red;
+  border-radius: 3px;
+  color: white;
+  font-size: 20px;
+  text-align: center;
+  line-height: 40px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+.player1, .player2 {
+  display: inline-block;
+  width: 49%;
+}
