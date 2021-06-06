@@ -84,7 +84,7 @@ function createInput() {
   inputDiv = document.querySelectorAll(".input-div");
   for(let m=0; m<2; m++) {
     var inputBox = document.createElement("input");
-    inputBox.setAttribute("placeholder", "What's your Name?");
+    inputBox.setAttribute("placeholder", "Player "+(m+1)+" Name");
     inputBox.classList.add(".input-box"+(m+1));
     var submitButton = document.createElement("button");
     submitButton.innerHTML = "Let's Go!";
