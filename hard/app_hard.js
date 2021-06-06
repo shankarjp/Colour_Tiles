@@ -92,22 +92,22 @@ console.log(puzzleColors);
 console.log(solutionColors);
 
 function checkFinish() {
-  response[0] = document.querySelector('.box8').style.backgroundColor;
-  response[1] = document.querySelector('.box9').style.backgroundColor;
-  response[2] = document.querySelector('.box10').style.backgroundColor;
-  response[3] = document.querySelector('.box11').style.backgroundColor;
-  response[4] = document.querySelector('.box14').style.backgroundColor;
-  response[5] = document.querySelector('.box15').style.backgroundColor;
-  response[6] = document.querySelector('.box16').style.backgroundColor;
-  response[7] = document.querySelector('.box17').style.backgroundColor;
+  response[0] = document.querySelector('.box7').style.backgroundColor;
+  response[1] = document.querySelector('.box8').style.backgroundColor;
+  response[2] = document.querySelector('.box9').style.backgroundColor;
+  response[3] = document.querySelector('.box10').style.backgroundColor;
+  response[4] = document.querySelector('.box13').style.backgroundColor;
+  response[5] = document.querySelector('.box14').style.backgroundColor;
+  response[6] = document.querySelector('.box15').style.backgroundColor;
+  response[7] = document.querySelector('.box16').style.backgroundColor;
+  response[8] = document.querySelector('.box19').style.backgroundColor;
   response[8] = document.querySelector('.box20').style.backgroundColor;
   response[8] = document.querySelector('.box21').style.backgroundColor;
   response[8] = document.querySelector('.box22').style.backgroundColor;
-  response[8] = document.querySelector('.box23').style.backgroundColor;
+  response[8] = document.querySelector('.box25').style.backgroundColor;
   response[8] = document.querySelector('.box26').style.backgroundColor;
   response[8] = document.querySelector('.box27').style.backgroundColor;
   response[8] = document.querySelector('.box28').style.backgroundColor;
-  response[8] = document.querySelector('.box29').style.backgroundColor;
   for(let m=0; m<16; m++) {
     if(response[m] !== solutionColors[m]) {
       break;

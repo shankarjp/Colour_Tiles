@@ -11,11 +11,16 @@ var emptyIndex2 = emptyIndex1;
 var moves1 = 0;
 var moves2 = 0;
 var inputCount = 0;
+var isFinish1 = 0;
+var isFinish2 = 0;
+var lastFinish = 0;
+var firstCount = 0;
+var secondCount = 0;
 
 
 /*Creating the puzzle*/
 function createPuzzle() {
-  for(let i=0; i<25; i++) {
+  for(let i=0; i<36; i++) {
     for(let j=0; j<2; j++) {
       square = document.createElement('div');
       square.classList.add("box"+i);
@@ -28,7 +33,7 @@ function createPuzzle() {
 createPuzzle();
 
 function generatePuzzle() {
-  for(let k=0; k<25; k++) {
+  for(let k=0; k<36; k++) {
     if(k !== emptyIndex1) {
       var newColor = colors[Math.floor(Math.random() * colors.length)]
       squares[0][k].style.backgroundColor = newColor;
@@ -51,7 +56,7 @@ insertBlackbox();
 
 /*Create the solution*/
 function createSolution() {
-  for(let j=0; j<9; j++) {
+  for(let j=0; j<16; j++) {
     for(let k=0; k<2; k++) {
       solutionSquare = document.createElement('div');
       solution[k].appendChild(solutionSquare);
@@ -62,7 +67,7 @@ function createSolution() {
 createSolution()
 
 function generateSolution() {
-  for (let l=0; l<9; l++) {
+  for (let l=0; l<16; l++) {
     newIndex = Math.floor(Math.random() * puzzleColors.length);
     solutionSquares[0][l].style.backgroundColor = puzzleColors[newIndex];
     solutionSquares[1][l].style.backgroundColor = puzzleColors[newIndex];
@@ -109,7 +114,7 @@ function enableFunction() {
   if(inputCount === 2) {
     console.log("I am here!");
     timer = setInterval(timeStart, 1000);
-    keyFunction = function(event) {
+    keyFunction2 = function(event) {
       switch (event.keyCode) {
         case 38:
           MoveUp2();
@@ -127,6 +132,10 @@ function enableFunction() {
           MoveLeft2();
           checkFinish();
           break;
+      }
+    };
+    keyFunction1 = function(event) {
+      switch (event.keyCode) {
         case 65:
           MoveLeft1();
           checkFinish();
@@ -143,6 +152,10 @@ function enableFunction() {
           MoveDown1();
           checkFinish();
           break;
+      }
+    };
+    musicFunction = function(event) {
+      switch (event.keyCode) {
         case 66:
           playbgm();
           document.querySelector(".instruction").innerHTML = "Press M to stop background music 🔇";
@@ -151,15 +164,11 @@ function enableFunction() {
           stopbgm();
           document.querySelector(".instruction").innerHTML = "Press B for better experience 🎧";
           break;
-        case 49:
-          youWin(1);
-          break;
-        case 50:
-          youWin(2);
-          break;
       }
     };
-    document.addEventListener('keyup', keyFunction);
+    document.addEventListener('keyup', keyFunction1);
+    document.addEventListener('keyup', keyFunction2);
+    document.addEventListener('keyup', musicFunction);
     enableMousemove();
   }
 }
@@ -167,13 +176,13 @@ function enableFunction() {
 
 /*Enabling Mouse Movement*/
 function enableMousemove() {
-  for(let j=0; j<25; j++) {
+  for(let j=0; j<36; j++) {
     document.querySelectorAll(".box"+j)[0].addEventListener("click", function enablePuzzle1(e) {
       var index1 = j;
-      if((emptyIndex1 - index1) === 5) {
+      if((emptyIndex1 - index1) === 6) {
         MoveDown1();
         checkFinish();
-      } else if((emptyIndex1 - index1) === -5) {
+      } else if((emptyIndex1 - index1) === -6) {
         MoveUp1();
         checkFinish();
       } else if((emptyIndex1 - index1) === 1) {
@@ -186,10 +195,10 @@ function enableMousemove() {
     });
       document.querySelectorAll(".box"+j)[1].addEventListener("click", function enablePuzzle2(e) {
         var index2 = j;
-        if((emptyIndex2 - index2) === 5) {
+        if((emptyIndex2 - index2) === 6) {
           MoveDown2();
           checkFinish();
-        } else if((emptyIndex2 - index2) === -5) {
+        } else if((emptyIndex2 - index2) === -6) {
           MoveUp2();
           checkFinish();
         } else if((emptyIndex2 - index2) === 1) {
@@ -204,55 +213,55 @@ function enableMousemove() {
 
 /*Block Movement Functions*/
 function MoveDown1() {
-  if (emptyIndex1>=5) {
+  if (emptyIndex1>=6) {
     current = document.querySelectorAll(".box"+emptyIndex1)[0];
-    target = document.querySelectorAll(".box"+(emptyIndex1-5))[0];
+    target = document.querySelectorAll(".box"+(emptyIndex1-6))[0];
     var temp = current.style.backgroundColor;
     current.style.backgroundColor = target.style.backgroundColor;
     target.style.backgroundColor = temp;
-    emptyIndex1 -= 5;
+    emptyIndex1 -= 6;
     increaseMoves1();
   }
 }
 
 function MoveDown2() {
-  if (emptyIndex2>=5) {
+  if (emptyIndex2>=6) {
     current = document.querySelectorAll(".box"+emptyIndex2)[1];
-    target = document.querySelectorAll(".box"+(emptyIndex2-5))[1];
+    target = document.querySelectorAll(".box"+(emptyIndex2-6))[1];
     var temp = current.style.backgroundColor;
     current.style.backgroundColor = target.style.backgroundColor;
     target.style.backgroundColor = temp;
-    emptyIndex2 -= 5;
+    emptyIndex2 -= 6;
     increaseMoves2();
   }
 }
 
 function MoveUp1() {
-  if (emptyIndex1<=20) {
+  if (emptyIndex1<=30) {
     current = document.querySelectorAll(".box"+emptyIndex1)[0];
-    target = document.querySelectorAll(".box"+(emptyIndex1+5))[0];
+    target = document.querySelectorAll(".box"+(emptyIndex1+6))[0];
     var temp = current.style.backgroundColor;
     current.style.backgroundColor = target.style.backgroundColor;
     target.style.backgroundColor = temp;
-    emptyIndex1 += 5;
+    emptyIndex1 += 6;
     increaseMoves1();
   }
 }
 
 function MoveUp2() {
-  if (emptyIndex2<=20) {
+  if (emptyIndex2<=30) {
     current = document.querySelectorAll(".box"+emptyIndex2)[1];
-    target = document.querySelectorAll(".box"+(emptyIndex2+5))[1];
+    target = document.querySelectorAll(".box"+(emptyIndex2+6))[1];
     var temp = current.style.backgroundColor;
     current.style.backgroundColor = target.style.backgroundColor;
     target.style.backgroundColor = temp;
-    emptyIndex2 += 5;
+    emptyIndex2 += 6;
     increaseMoves2();
   }
 }
 
 function MoveRight1() {
-  if (emptyIndex1 %5 !== 0) {
+  if (emptyIndex1 %6 !== 0) {
     current = document.querySelectorAll(".box"+emptyIndex1)[0];
     target = document.querySelectorAll(".box"+(emptyIndex1-1))[0];
     var temp = current.style.backgroundColor;
@@ -264,7 +273,7 @@ function MoveRight1() {
 }
 
 function MoveRight2() {
-  if (emptyIndex2 %5 !== 0) {
+  if (emptyIndex2 %6 !== 0) {
     current = document.querySelectorAll(".box"+emptyIndex2)[1];
     target = document.querySelectorAll(".box"+(emptyIndex2-1))[1];
     var temp = current.style.backgroundColor;
@@ -276,7 +285,7 @@ function MoveRight2() {
 }
 
 function MoveLeft1() {
-  if (emptyIndex1 %5 !== 4) {
+  if (emptyIndex1 %6 !== 5) {
     current = document.querySelectorAll(".box"+emptyIndex1)[0];
     target = document.querySelectorAll(".box"+(emptyIndex1+1))[0];
     var temp = current.style.backgroundColor;
@@ -288,7 +297,7 @@ function MoveLeft1() {
 }
 
 function MoveLeft2() {
-  if (emptyIndex2 %5 !== 4) {
+  if (emptyIndex2 %6 !== 5) {
     current = document.querySelectorAll(".box"+emptyIndex2)[1];
     target = document.querySelectorAll(".box"+(emptyIndex2+1))[1];
     var temp = current.style.backgroundColor;
@@ -313,8 +322,8 @@ function increaseMoves2() {
 
 /*Maintaining Record*/
 function createRecord(p) {
-  if(JSON.parse(localStorage.getItem(document.getElementsByClassName(".input-box"+(p+1))[0].value)) !== null) {
-    document.querySelectorAll(".record")[p].innerHTML = "Record : " + JSON.parse(localStorage.getItem(document.getElementsByClassName(".input-box"+(p+1))[0].value)).record;
+  if(JSON.parse(localStorage.getItem(document.getElementsByClassName(".input-box"+(p+1))[0].value + "Hard")) !== null) {
+    document.querySelectorAll(".record")[p].innerHTML = "Record : " + JSON.parse(localStorage.getItem(document.getElementsByClassName(".input-box"+(p+1))[0].value + "Hard")).record;
   } else {
     document.querySelectorAll(".record")[p].innerHTML = "Record : none";
   }
@@ -322,79 +331,123 @@ function createRecord(p) {
 document.querySelectorAll(".record")[0].innerHTML = "Record : none";
 document.querySelectorAll(".record")[1].innerHTML = "Record : none";
 
-function setRecord(recordnum) {
+function setRecord() {
   console.log("I'm here!");
-  if(recordnum === 0) {
-    var name1 = (document.querySelectorAll(".playerHeading1")[0].innerHTML).split(": ")[1];
-    if(JSON.parse(localStorage.getItem(name1)) !== null) {
-        if(JSON.parse(localStorage.getItem(name1)).record > moves1) {
-          var data1 = {record: moves1};
-          localStorage.setItem(name1, JSON.stringify(data1));
-        }
-      } else {
-      var data1 = {record: moves1}
-      localStorage.setItem(name1, JSON.stringify(data1));
-    }
-    document.querySelectorAll(".record")[0].innerHTML = "Record : " + JSON.parse(localStorage.getItem(name1)).record;
-  } else if(recordnum === 1) {
-    var name2 = (document.querySelectorAll(".playerHeading2")[0].innerHTML).split(": ")[1];
-    if(JSON.parse(localStorage.getItem(name2)) !== null) {
-        if(JSON.parse(localStorage.getItem(name2)).record > moves2) {
-          var data2 = {record: moves2};
-          localStorage.setItem(name2, JSON.stringify(data2));
-        }
-      } else {
-      var data2 = {record: moves2}
-      localStorage.setItem(name2, JSON.stringify(data2));
-    }
-    document.querySelectorAll(".record")[1].innerHTML = "Record : " + JSON.parse(localStorage.getItem(name2)).record;
+  var name1 = (document.querySelectorAll(".playerHeading1")[0].innerHTML).split(": ")[1] + "Hard";
+  if(JSON.parse(localStorage.getItem(name1)) !== null) {
+      if(JSON.parse(localStorage.getItem(name1)).record > moves1) {
+        var data1 = {record: moves1};
+        localStorage.setItem(name1, JSON.stringify(data1));
+      }
+    } else {
+    var data1 = {record: moves1}
+    localStorage.setItem(name1, JSON.stringify(data1));
   }
+  document.querySelectorAll(".record")[0].innerHTML = "Record : " + JSON.parse(localStorage.getItem(name1)).record;
+
+  var name2 = (document.querySelectorAll(".playerHeading2")[0].innerHTML).split(": ")[1] + "Hard";
+  if(JSON.parse(localStorage.getItem(name2)) !== null) {
+      if(JSON.parse(localStorage.getItem(name2)).record > moves2) {
+        var data2 = {record: moves2};
+        localStorage.setItem(name2, JSON.stringify(data2));
+      }
+    } else {
+    var data2 = {record: moves2}
+    localStorage.setItem(name2, JSON.stringify(data2));
+  }
+  document.querySelectorAll(".record")[1].innerHTML = "Record : " + JSON.parse(localStorage.getItem(name2)).record;
 };
 
 /*Checking for game finish*/
 function checkFinish() {
   for(let r=0; r<2; r++) {
-    response[r][0] = document.querySelectorAll('.box6')[r].style.backgroundColor;
-    response[r][1] = document.querySelectorAll('.box7')[r].style.backgroundColor;
-    response[r][2] = document.querySelectorAll('.box8')[r].style.backgroundColor;
-    response[r][3] = document.querySelectorAll('.box11')[r].style.backgroundColor;
-    response[r][4] = document.querySelectorAll('.box12')[r].style.backgroundColor;
-    response[r][5] = document.querySelectorAll('.box13')[r].style.backgroundColor;
-    response[r][6] = document.querySelectorAll('.box16')[r].style.backgroundColor;
-    response[r][7] = document.querySelectorAll('.box17')[r].style.backgroundColor;
-    response[r][8] = document.querySelectorAll('.box18')[r].style.backgroundColor;
-    for(let m=0; m<9; m++) {
+    response[r][0] = document.querySelectorAll('.box7')[r].style.backgroundColor;
+    response[r][1] = document.querySelectorAll('.box8')[r].style.backgroundColor;
+    response[r][2] = document.querySelectorAll('.box9')[r].style.backgroundColor;
+    response[r][3] = document.querySelectorAll('.box10')[r].style.backgroundColor;
+    response[r][4] = document.querySelectorAll('.box13')[r].style.backgroundColor;
+    response[r][5] = document.querySelectorAll('.box14')[r].style.backgroundColor;
+    response[r][6] = document.querySelectorAll('.box15')[r].style.backgroundColor;
+    response[r][7] = document.querySelectorAll('.box16')[r].style.backgroundColor;
+    response[r][8] = document.querySelectorAll('.box19')[r].style.backgroundColor;
+    response[r][9] = document.querySelectorAll('.box20')[r].style.backgroundColor;
+    response[r][10] = document.querySelectorAll('.box21')[r].style.backgroundColor;
+    response[r][11] = document.querySelectorAll('.box22')[r].style.backgroundColor;
+    response[r][12] = document.querySelectorAll('.box25')[r].style.backgroundColor;
+    response[r][13] = document.querySelectorAll('.box26')[r].style.backgroundColor;
+    response[r][14] = document.querySelectorAll('.box27')[r].style.backgroundColor;
+    response[r][15] = document.querySelectorAll('.box28')[r].style.backgroundColor;
+    for(let m=0; m<16; m++) {
       if(response[r][m] !== solutionColors[m]) {
         break;
-      } else if(m===8) {
-        youWin((r+1));
+      } else if(m===15) {
+        if(r===0) {
+          if(isFinish1<1) {
+            isFinish1++;
+            var endScreen = document.createElement('div');
+            endScreen.classList.add('endScreen');
+            puzzle[r].appendChild(endScreen);
+            document.removeEventListener('keyup',  keyFunction1);
+            document.querySelectorAll('.black-box')[0].classList.add('endBlackbox');
+          }
+          firstCount++;
+        } else if(r===1) {
+          if(isFinish2<1) {
+            isFinish2++;
+            var endScreen = document.createElement('div');
+            endScreen.classList.add('endScreen');
+            puzzle[r].appendChild(endScreen);
+            document.removeEventListener('keyup',  keyFunction2);
+            document.querySelectorAll('.black-box')[1].classList.add('endBlackbox');
+          }
+          secondCount++;
+        }
+        if((isFinish1>=1)&&(isFinish2>=1)) {
+          if(firstCount > secondCount) {
+            lastFinish = 1;
+          } else if(secondCount > firstCount) {
+            lastFinish = 0;
+          }
+          youWin();
+        }
+        }
       }
     }
   }
-}
 
-function youWin(winnum) {
+function youWin() {
+  if(moves1 < moves2) {
+    winnum = 1;
+  } else if(moves2 < moves1) {
+    winnum = 2;
+  } else {
+    winnum = -1;
+  }
   for(let t=0; t<2; t++) {
-    console.log("Checkpoint1");
-    var endScreen = document.createElement('div');
-    endScreen.classList.add('endScreen');
-    puzzle[t].appendChild(endScreen);
     if(t === (winnum-1)) {
-      console.log("Checkpoint2");
       var message = document.createElement('h1');
       message.innerHTML = "You Win!";
       message.classList.add('message');
       puzzle[t].appendChild(message);
-      setRecord(t);
+    } else if(winnum === -1) {
+      if(t === lastFinish) {
+        var message = document.createElement('h1');
+        message.innerHTML = "You Lose!";
+        message.classList.add('message');
+        puzzle[t].appendChild(message);
+      } else {
+        var message = document.createElement('h1');
+        message.innerHTML = "You Win!";
+        message.classList.add('message');
+        puzzle[t].appendChild(message);
+      }
     } else {
-      console.log("Checkpoint3");
       var message = document.createElement('h1');
       message.innerHTML = "You Lose!";
       message.classList.add('message');
       puzzle[t].appendChild(message);
     }
-    console.log("Checkpoint4");
-    document.querySelector('.black-box').classList.add('endBlackbox');
+    setRecord();
     home = document.createElement('h1');
     home.classList.add('home');
     home.innerHTML = "Home";
@@ -406,10 +459,9 @@ function youWin(winnum) {
     choicebox.appendChild(home);
     choicebox.appendChild(tryAgain);
     puzzle[t].appendChild(choicebox);
-    clearInterval(timer);
-    console.log("Checkpoint5");
   }
-  disableMove();
+  clearInterval(timer);
+  document.removeEventListener('keyup',  musicFunction);
   document.querySelectorAll('.tryAgain')[0].addEventListener("click", function() {
     window.location.reload(false);
   })
@@ -422,11 +474,6 @@ function youWin(winnum) {
   document.querySelectorAll('.home')[1].addEventListener("click", function() {
     window.location.replace("../index.html");
   })
-}
-
-/*Disable moves after victory*/
-function disableMove() {
-  document.removeEventListener('keyup',  keyFunction);
 }
 
 /*Timer*/
